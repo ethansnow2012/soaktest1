@@ -2,13 +2,9 @@ const functions = require('firebase-functions');
 const firebase = require('firebase');
 const admin = require('firebase-admin');
 const express = require('express');
-const csrf = require('csurf')
-var fs = require('fs');
+const fs = require('fs');
 const fetch = require('node-fetch');
-const url = require('url')
-
 const bodyParser = require('body-parser');
-
 const app = express();
 
 
@@ -20,74 +16,14 @@ admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://xxxx.firebaseio.com"
 })
+
 const storedb = admin.firestore();
 
-
-const appUrl = `www.atticstone.com`
-const renderUrl = `https://render-tron.appspot.com/render`
-
-
-
-
-function generateUrl(request){
-    return url.format({
-        protocol: request.protocol,
-        host: appUrl,
-        pathname: request.url
-    })
-} 
-function detectBot(userAgent){
-    const bots = [
-        'googlebot'
-    ]
-    const agent = userAgent.toLowerCase()
-
-    for( const bot of bots ){
-        if(agent.indexOf(bot)> -1){
-            return true
-        }
-    }
-    return false
-}
-
 const indexHtml = fs.readFileSync (__dirname+'/dist/index2.js.html').toString()
-let cors = require('cors');
-const { setTimeout } = require('timers');
-app.get('/awake',(req, res) => {
-    res.send('awake')
-})
-app.get ('/test2', cors(),(req, res) => {
-    res.send('test2')
-})
-app.get ('/test', (req, res) => {
-    const isBot = detectBot(req.headers['user-agent'])
-
-    res.send(isBot.toString())
-})
 
 app.get ('*', (req, res) => {
-    
-    const isBot = detectBot(req.headers['user-agent'])
-    
-    // res.send(isBot.toString())
-    // return
-
-    if(isBot){
-        let botUrl = generateUrl(req)
-        
-        fetch(`${renderUrl}/${botUrl}`)//
-            .then( res => res.text() )
-            .then(body =>{
-                res.set ('Cache-Control', 'public, max-age = 300, s-maxage = 600');
-                res.set('Vary', 'User-Agent')
-                res.send(body.toString())
-            } )
-    }else{
-        res.set ('Cache-Control', 'public, max-age = 300, s-maxage = 600');
-        res.status(200).send(indexHtml);
-    }
-
-    
+    res.set ('Cache-Control', 'public, max-age = 300, s-maxage = 600');
+    res.status(200).send(indexHtml);    
 });
 //====================================
 // T1 function
