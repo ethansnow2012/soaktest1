@@ -53,6 +53,7 @@ export default {
               console.log(json)
               if(json.status){
                 // nop
+                alert("信件寄出")
               }else{
                 alert(json.msg)
               }
