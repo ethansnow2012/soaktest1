@@ -1,0 +1,21 @@
+{
+  "indexes": [
+    { 
+      "collectionGroup": "log_emailSending",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "token", "order": "ASCENDING" },
+        { "fieldPath": "createTime", "order": "ASCENDING" }
+      ]
+    },
+    { 
+      "collectionGroup": "log_emailSending",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "uid", "order": "ASCENDING" },
+        { "fieldPath": "createTime", "order": "ASCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

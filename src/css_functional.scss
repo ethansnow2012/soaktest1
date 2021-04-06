@@ -1,0 +1,13 @@
+.theWrapper > * + *{
+    margin-top: $margin-top-component;
+}
+.theWrapper{
+    position: relative;
+    width: max-content;
+    padding: 3px;
+    & > *{
+        max-width: 375px;    
+        min-width: 27vmin !important;
+
+    }
+}

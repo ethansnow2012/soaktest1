@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  
+  
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
+  </head>
+  <body>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId            : '176413820989365',
+          //appId            : '182315770234869',
+          autoLogAppEvents : true,
+          xfbml            : true,
+          version          : 'v10.0'
+        });
+      };
+    </script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+
+    <div id="app"></div>
+    
+    <script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      var firebaseConfig = {
+        apiKey: "AIzaSyDhXxFWAkUbwaG5CsHIUujUD5bbebilRFA",
+        authDomain: "oaktest1-50022.firebaseapp.com",
+        databaseURL: "https://oaktest1-50022-default-rtdb.firebaseio.com",
+        projectId: "oaktest1-50022",
+        storageBucket: "oaktest1-50022.appspot.com",
+        messagingSenderId: "289252517573",
+        appId: "1:289252517573:web:88604999c82d230fa6f2ac"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      var firestore = firebase.firestore();
+      
+
+      const firebase_auth = new firebase.auth.GoogleAuthProvider();
+      const firebaseGSignin = (fn)=>{
+        firebase_auth.setCustomParameters({
+          prompt: 'select_account'
+        });
+        firebase.auth().signInWithPopup(firebase_auth).then((result)=>{
+          console.log(result)
+          if(result.user.displayName){
+            if(fn){
+              fn(result)
+            }
+          }else{// No displayName means not loged in.
+            if(fn){
+              fn()
+            } 
+          }
+        }).catch((err)=>{
+          console.log(err)
+        })
+        
+      }
+      const firebaseGSignout = async (fn_next)=>{
+        console.log('log out')
+        await firebase.auth().signOut()
+        if(fn_next){
+          await fn_next()
+        }
+      }
+      
+
+
+    </script>
+    <!-- built files will be auto injected -->
+  </body>
+</html>

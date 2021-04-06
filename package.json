@@ -1,0 +1,58 @@
+{
+  "name": "mygdb-api",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build --mode development && cp -R ./dist ./functions/ && mv ./functions/dist/index.html ./functions/dist/index2.js.html",
+    "build-formal": "vue-cli-service build && cp -R ./dist ./functions/ && mv ./functions/dist/index.html ./functions/dist/index2.js.html",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@editorjs/code": "^2.6.0",
+    "@editorjs/delimiter": "^1.2.0",
+    "@editorjs/editorjs": "^2.19.1",
+    "@editorjs/embed": "^2.4.0",
+    "@editorjs/header": "^2.6.1",
+    "@editorjs/image": "^2.6.0",
+    "@editorjs/link": "^2.3.1",
+    "@editorjs/list": "^1.6.1",
+    "@editorjs/simple-image": "^1.4.0",
+    "core-js": "^3.6.5",
+    "firebase-functions": "^3.13.2",
+    "multer": "^1.4.2",
+    "vue": "^3.0.4",
+    "vue-router": "^4.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.0",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^7.0.0-0",
+    "node-sass": "^5.0.0",
+    "sass-loader": "^10.1.1"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

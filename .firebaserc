@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "oaktest1-50022": {
+      "hosting": {
+        "app": [
+          "oaktest1-50022"
+        ]
+      }
+    }
+  }
+}
